@@ -1,6 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
-const moment = require('moment')
+const moment = require('moment');
 
+// Define the reaction schema for individual reactions to thoughts
 const reactionSchema = new Schema (
     {
        reactionId: {
@@ -19,6 +20,7 @@ const reactionSchema = new Schema (
        createdAt: {
         type: Date,
         default: Date.now,
+        // Format the createdAt date using moment.js
         get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
        },
     },
@@ -29,8 +31,9 @@ const reactionSchema = new Schema (
         },
         id: false,
     }
-)
+);
 
+// Define the thought schema for representing thoughts and their associated reactions
 const thoughtSchema = new Schema (
     {
       thoughtText: {
@@ -42,13 +45,14 @@ const thoughtSchema = new Schema (
       createdAt: {
         type: Date,
         default: Date.now,
+        // Format the createdAt date using moment.js
         get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
       },
       username: {
         type: String,
         required: true,
       },
-      reactions: [reactionSchema],
+      reactions: [reactionSchema], // Embed the reaction schema within the thought schema
     },
     {
         toJSON: {
@@ -57,13 +61,16 @@ const thoughtSchema = new Schema (
         },
         id: false,
     }
-)
+);
 
+// Define a virtual property 'reactionCount' to calculate the number of reactions for a thought
 thoughtSchema.virtual('reactionCount')
 .get(function() {
     return this.reactions.length;
-})
+});
 
+// Create the Thought model using the thought schema
 const Thought = model('Thought', thoughtSchema);
 
+// Export the Thought model for use in other parts of the application
 module.exports = Thought;
