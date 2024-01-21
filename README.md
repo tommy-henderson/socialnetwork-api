@@ -14,6 +14,9 @@ In your API platform, you can test all the routes. GET routes are: Users, User b
 
 ![Testing some routes](<Untitled_ Jan 21, 2024 11_06 AM.gif>)
 
+If you'd like to see a higher res Google Drive link of the gif, see below:
+https://drive.google.com/file/d/1tMdQV85XiqAbD4-92CzZ22JauQe9LEgd/view
+
 ## Credits
 
 This project was a huge help anytime I got stuck:
